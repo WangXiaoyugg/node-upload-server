@@ -7,7 +7,6 @@ const path = require('path')
 const app = express()
 
 app.post('/upload', cors(), upload.single('file'), (req, res, next) => {
-  console.log(req.file)
   res.send(req.file.filename)
 })
 
