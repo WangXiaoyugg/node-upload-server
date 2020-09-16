@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <form id="form" action="http://127.0.0.1:3000/upload" method="post" enctype="multipart/form-data">
+  <form id="form" action="https://node-upload-server.herokuapp.com/upload" method="post" enctype="multipart/form-data">
     <div>
       <input type="file" name="file">
     </div>
@@ -29,7 +29,7 @@
       xhr.open('POST', form.action)
       xhr.onload = function () {
         console.log(xhr.response)
-        img.src = `http://127.0.0.1:3000/preview/${xhr.response}`
+        img.src = `https://node-upload-server.herokuapp.com/preview/${xhr.response}`
       }
       xhr.send(formData)
     })
