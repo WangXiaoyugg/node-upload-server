@@ -21,6 +21,7 @@ app.get('/preview/:id', (req, res, next) => {
   })
 })
 
-app.listen(3000, () => {
-  console.log('http://127.0.0.1:3000')
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`http://127.0.0.1:${PORT}`)
 })
