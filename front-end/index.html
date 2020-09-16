@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>upload-demo</title>
+</head>
+
+<body>
+  <form id="form" action="http://127.0.0.1:3000/upload" method="post" enctype="multipart/form-data">
+    <div>
+      <input type="file" name="file">
+    </div>
+    <input type="submit" value="提交">
+  </form>
+  <img id="img" src="" alt="">
+  <script>
+    let form = document.querySelector('#form')
+    let img = document.querySelector('#img')
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+
+      let formData = new FormData()
+      let fileInput = document.querySelector("input[name=file]")
+      formData.append('file', fileInput.files[0])
+      let xhr = new XMLHttpRequest()
+      xhr.open('POST', form.action)
+      xhr.onload = function () {
+        console.log(xhr.response)
+        img.src = `http://127.0.0.1:3000/preview/${xhr.response}`
+      }
+      xhr.send(formData)
+    })
+  </script>
+</body>
+
+</html>

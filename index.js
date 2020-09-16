@@ -2,12 +2,24 @@ const express = require('express')
 const multer = require('multer')
 const cors = require('cors')
 const upload = multer({ dest: 'uploads/' })
+const path = require('path')
 
 const app = express()
 
-app.post('/upload', upload.single('file'), (req, res, next) => {
+app.post('/upload', cors(), upload.single('file'), (req, res, next) => {
   console.log(req.file)
   res.send(req.file.filename)
+})
+
+app.get('/preview/:id', (req, res, next) => {
+  res.sendFile(`/uploads/${req.params.id}`, {
+    root: path.join(__dirname),
+    headers: {
+      'Content-Type': 'image/*'
+    },
+  }, error => {
+    res.status(404).end('file not found')
+  })
 })
 
 app.listen(3000, () => {
